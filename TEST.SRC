@@ -1,0 +1,11 @@
+Initialize:
+0:
+    End() ;
+
+1:
+    WallState(5, 10) ;
+    SideState(6, 11) ;
+    SectorState(7, 12) ;
+    GroupState(8) ;
+    End() ;
+

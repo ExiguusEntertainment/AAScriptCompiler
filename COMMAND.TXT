@@ -1,0 +1,241 @@
+
+Command Form:                      Meaning:
+----------------------------       --------------------------------
+End() ;                            Done with script event/place.
+
+Set(Var, Value) ;                  Var = Value
+
+Print("Message") ;                 Add "Message" to screen
+
+If(Condition, Place) ;             If Condition true, go to # Place
+
+IfNot(Condition, Place) ;          If Condition false, go to # Place
+
+Goto(Place) ;                      Goto position # Place
+
+Absolute(var)                      Makes var the absolute value of var.
+
+Negate(var)                        var = -var
+
+Clear(var)                         Var = 0
+
+Add(Var, A, B) ;                   Var = A + B
+
+Subtract(Var, A, B) ;              Var = A - B
+
+Multiply(Var, A, B) ;              Var = A * B
+
+Divide(Var, A, B) ;                Var = A / B
+
+Increment(Var) ;                   Var = Var + 1
+
+Decrement(Var) ;                   Var = Var - 1
+
+Compare(A, B) ;                    Does all types of comparisons between
+                                   A and B (see Equal, NotEqual, ...)
+
+Sound(A) ;                         Play Sound # A
+
+ChangeSideTexture(side, "texture") Change main wall texture of side
+                                   to given "texture"
+
+ObjectSetType(objNum, typeNum)     Makes object #objNum become an object
+                                   of #typeNum
+
+Teleport(x, y, z)                  Move player to new location. Currently
+                                   z is not used.  May be angle later.
+                                   Just use 0.
+
+DoorCycle(doorNum)                 Has a door open, wait, then close.
+
+DoorLock(doorNum)                  Makes given door locked.
+
+DoorUnlock(doorNum)                Makes given door unlocked.
+
+AreaSound(soundNum, x, y, radius, volume)
+                                   AreaSound creates an area of sound
+                                   on the map that everyone can hear.
+                                   Radius is the max distance it can
+                                   be heard, volume is the max volume
+                                   at the center point.  Sound tapers
+                                   off.
+
+Delay(time70)                      Wait time70 ticks (in 70ths of a
+                                   second) before continuing the
+                                   script.  This DOES NOT lock up
+                                   the computer and the world may
+                                   change while this delay occurs.
+
+SlideFloor(sector, startHeight, endHeight, timeToTake, placeWhenFinished)
+                                   Sector is the area to change the
+                                   floor height.  StartHeight is the
+                                   height that the floor immediately
+                                   becomes.  EndHeight is what height
+                                   it will go to.  TimeToTake is the
+                                   length of time it will take to
+                                   go through the transition in 70ths
+                                   of a second.  PlaceWhenFinished is
+                                   the script place to call when
+                                   completed.  A value of -1 means
+                                   none.
+
+SlideCeiling(sector, startHeight, endHeight, timeToTake, placeWhenFinished)
+                                   Just like SlideFloor.
+
+Gosub(scriptPlace) ;               Execute scriptPlace, then come back.
+
+Random(Var, maxValue) ;            Var = randomly 0 to maxValue-1
+
+ObjectSound(soundNum, objNum, radius, volume)
+                                   ObjectSound creates an area sound
+                                   based on a given object.  Otherwise,
+                                   it is just like AreaSound.
+
+ObjectGet(objNum, attribute, var)
+                                   Gets an object's attribute and puts
+                                   it in the given var.  Attributes
+                                   are as follows:
+
+            ObjectAttrX            - 32 bit X position
+            ObjectAttrY            - 32 bit Y position
+            ObjectAttrZ            - 32 bit Z position
+            ObjectAttrMaxVel       - Maximum velocity of object
+            ObjectAttrStance       - Current standing stance of object
+            ObjectAttrWasBlocked   - Check if object was blocked when
+                                     last moved. (0=not blocked)
+            ObjectAttrX16          - 16 bit X position
+            ObjectAttrY16          - 16 bit Y position
+            ObjectAttrZ16          - 16 bit Z position
+            ObjectAttrAngle        - Facing angle of object
+
+ObjectSet(objNum, attribute, value)
+                                   Just like ObjectGet, but puts value
+                                   into object.
+
+Error(message)                     Used for internal checks.  Will crash
+                                   the game and display this message.
+
+LookForPlayer(objNum, var)         Puts in var the angle to the closest
+                                   player from the given object location.
+
+ObjectGetAngleToObject(var, source, target)
+                                   Finds the angle of given target object
+                                   in reference to given soruce object
+                                   and puts in var.
+
+ObjectDistanceToObject(distance, source, target)
+                                   Calculates the distance between
+                                   source and target object and puts
+                                   value in distance.
+
+ObjectAccelForward(object, acceleration)
+                                   Accelerates an object forward
+                                   the given amount of speed.
+                                   Typical values are around 10.
+
+ObjectDamageForward(object, distance, radius, typeDamage, damageAmount)
+                                   Makes an object attempt to damage
+                                   in front of it.  Distance given
+                                   is from the center point of the object.
+                                   Radius is the area's radius of
+                                   the damage (such as an explosion).
+                                   TypeDamage is the type of damage
+                                   being used (0=default physical damage).
+                                   DamageAmount is how much damage is
+                                   done (an average amount is 100-500).
+
+TextBoxSetSelection(textBoxID, selection)
+                                   Changes the currently highlighted
+                                   selection in a text box.
+
+ObjectShootObject(source, objType, initialVel)
+                                   Creates a projectile object from
+                                   the given source object and moves
+                                   outward at the given initial velocity.
+                                   The projectile type is given objType.
+                                   Its angle is equal to the source.
+
+PlayerObjectGet(var)               Puts in var the number of the
+                                   player object.
+
+GetFloorHeight(var, sector)        Puts in var the given sector's
+                                   floor height.
+
+GetCeilingHeight(var, sector)      Puts in var the given sector's
+                                   ceiling height.
+
+DoorIncreaseLock(door, amt)        Increases the lock on a door
+                                   by the given amount (0-255)
+
+DoorDecreaseLock(door, amt)        Decreases the lock on a door
+                                   by the given amount (0-255)
+
+SideState(sideNum, state)          Puts the given side into the
+                                   given side state.
+
+WallState(wallNum, state)          Puts the given wall/line into the
+                                   given wall state.
+
+SectorState(sideNum, state)        Puts the given sector into the given
+                                   sector state.
+
+GivePlayerXP(amtXP)                Gives player experience points.
+
+GiveAllPlayersXP(amtXP)            Gives all players on level xp.
+
+Effect(effect, data1, data2, data3)
+                                   Do an effect on the player.  See
+                                   the effects system for more details.
+
+SectorSetLight(sector, lightLevel) Make a sector change in light level.
+                                   NOTE: Might not work if sector is
+                                   in light script.
+
+GenerateMissile(objType, x, y, z, targetX, targetY, targetZ, initSpeed)
+                                   Create a missile anywhere with the
+                                   given velocity.  Automatically computes
+                                   the facing angle based on the xy vel.
+                                   Shoots at the given target location.
+
+PlayerHasItem(var, objType)
+                                   Checks if a player has the given item
+                                   and if he does puts a 1 into the var.
+                                   Otherwise a 0 is put into var.
+
+IsEffectActive(var, effectType)    Checks if effectType is active and if
+                                   is, puts a 1 into var, otherwise a 0.
+
+ActivateGenerator(genID)           Turns on a generator by its id.
+
+DeactiveGenerator(genID)           Turns off a generator by its id.
+
+GroupState(groupNum)               Activates a group state.
+
+
+Script place numbers less than 200 are executed on all players
+that are in the map.  200 and above only occur to that player.
+
+Conditionals and Constants:
+----------------------------
+Self                               Returns owner handle.  Typically
+                                   only used for creatures.
+
+Time                               Number of 70ths of a second since
+                                   the game was started.
+
+Equal                              Last compare was equal
+
+NotEqual                           Last compare was not equal
+
+LessThan                           Last compare was less than
+
+NotLessThan                        Last compare was not less than
+
+GreaterThan                        Last compare was greater than
+
+NotGreaterThan                     Last compare was not greater than
+
+LessThanOrEqual                    Last compare was less than or equal
+
+NotLessThanOrEqual                 Last compare was not less than or equal
+
