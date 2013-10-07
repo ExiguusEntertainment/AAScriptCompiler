@@ -1,0 +1,17 @@
+defnum CONSTANT_NUMBER		1   // Constants to use
+
+// Variables are defined with defvar and you have 1..255 of them
+defvar	AnyName		1
+
+Initialize:
+0:
+	// Script run when the level is loaded
+	End()
+
+200: // Script numbers 200 and above ONLY happen for this player.  All other scripts happen for all players.
+	End()
+
+255: // Last possible script number
+	End()
+
+	
