@@ -1,0 +1,217 @@
+defnum   NOT_ACTIVATED 0
+defnum   ACTIVATED     1
+defnum   NOT_COMPLETE  0
+defnum   COMPLETE      1
+
+defvar   Block1     1
+defvar   Block2     2
+defvar   Block3     3
+defvar   DruidLift  4
+defvar   Block4     5
+defvar   Block5     6
+defvar   Block6     7
+defvar   TrapComplete 8
+defvar   TrapDoor   9
+defvar   DruidLock  10
+defvar   Block7     11
+defvar   Block8     12
+defvar   Block9     13
+defvar   Block10    14
+
+Initialize:
+0:
+   Set(DruidLift, NOT_ACTIVATED);
+   Unblock(Block1);
+   Unblock(Block2);
+   Unblock(Block3);
+   Unblock(Block4);
+   Unblock(Block5);
+   Unblock(Block6);
+   Unblock(Block7);
+   Unblock(Block8);
+   Unblock(Block9);
+   Unblock(Block10);
+   Set(TrapComplete,NOT_COMPLETE);
+   Set(TrapDoor, NOT_ACTIVATED);
+   Set(DruidLock, NOT_ACTIVATED);
+   End();
+
+1:    //
+   End();
+
+2:
+   End();
+
+8:
+   End();
+
+10:     // Activate druid on lift
+   Compare(DruidLift, ACTIVATED);
+   If(Equal, 99);
+   Block(Block1);
+   SlideFloor(66, 0, -88, 140, -1);
+   AreaSound(5001, -1099, 2817, 400, 255);
+   Set(DruidLift, ACTIVATED);
+   Unblock(Block1);
+   End();
+
+11:     // Druid lift down
+   Compare(DruidLift, NOT_ACTIVATED);
+   If(Equal, 10);
+   Block(Block2);
+   SlideFloor(66, 0, -280, 140, -1);
+   AreaSound(5001, -1099, 2817, 400, 255);
+   Set(DruidLift, NOT_ACTIVATED);
+   Delay(200);
+   SlideFloor(159, 0, -200, 100, -1);
+   AreaSound(5003, -1099, 2817, 400, 255);
+   Delay(600);
+   SlideFloor(159, 0, -340, 100, -1);
+   AreaSound(5003, -1099, 2817, 400, 255);
+   Unblock(Block2);
+   Goto(10);
+   End();
+
+15:    // druid room lock-in, also reset trap
+   Compare(DruidLock, ACTIVATED);
+   If(Equal, 99);
+   SlideCeilingNice(162, 0, 0, 80, -1);
+   AreaSound(5003, 139, 1433, 500, 255);
+   Set(DruidLock, ACTIVATED);
+   End();
+
+16:     // druid room switch 1
+   Compare(TrapComplete, COMPLETE);
+   If(Equal, 99);
+   Block(Block4);
+   Set(TrapDoor,ACTIVATED);
+   ChangeSideTexture(1574,"SWIT1U");
+   AreaSound(6007,77,1144,300,255);
+   Delay(300);
+   Gosub(21);
+   Delay(160);
+   ChangeSideTexture(1574,"SWIT1D");
+   AreaSound(6007,77,1144,300,255);
+   Gosub(20);
+   Unblock(Block4);
+   End();
+
+17:     // druid room switch 2
+   Compare(TrapComplete, COMPLETE);
+   If(Equal, 99);
+   Block(Block5);
+   Set(TrapDoor, ACTIVATED);
+   ChangeSideTexture(1584,"SWIT1U");
+   AreaSound(6007,130,1144,300,255);
+   Delay(300);
+   Gosub(22);
+   Delay(160);
+   ChangeSideTexture(1584,"SWIT1D");
+   AreaSound(6007,130,1144,300,255);
+   Unblock(Block5);
+   End();
+
+18:     // druid room switch 3
+   Compare(TrapComplete, COMPLETE);
+   If(Equal, 99);
+   Block(Block6);
+   Set(TrapDoor, ACTIVATED);
+   ChangeSideTexture(1592,"SWIT1U");
+   AreaSound(6007,173,1144,300,255);
+   Delay(300);
+   Gosub(23);
+   Delay(160);
+   ChangeSideTexture(1592,"SWIT1D");
+   AreaSound(6007,173,1144,300,255);
+   Gosub(20);
+   Unblock(Block6);
+   End();
+
+19:     // druid room trap completed, open all doors   
+   Compare(TrapComplete, COMPLETE);
+   If(Equal,99);
+   Set(TrapComplete, COMPLETE);
+   Delay(300);
+   SlideCeilingNice(162, 0, 140, 80, -1);
+   AreaSound(5003, 139, 1433, 500, 255);
+   SlideCeilingNice(165,0,120,50,-1);
+   AreaSound(5003, 24, 931, 500, 255);
+   SlideCeilingNice(166,0,120,50,-1);
+   AreaSound(5003, 2, 1048, 500, 255);
+   SlideCeilingNice(168,0,120,50,-1);
+   AreaSound(5003, 2, 824, 500, 255);
+   End();
+
+20:     // missiles in trap
+   GenerateMissile(4015, 39, 866, 45, -24, 866, 45, 50);
+   GenerateMissile(4015, 39, 986, 45, -24, 986, 45, 50);
+   End();
+
+21:     // open middle door
+   Block(Block7);
+   SlideCeilingNice(165,0,120,50,-1);
+   AreaSound(5003, 24, 931, 500, 255);
+   Delay(90);
+   SlideCeilingNice(165,0,0,50,-1);
+   AreaSound(5003, 24, 931, 500, 255);
+   Delay(70);
+   Unblock(Block7);
+   End();
+
+22:    // open first door
+   Block(Block8);
+   SlideCeilingNice(166,0,120,50,-1);
+   AreaSound(5003, 2, 1048, 500, 255);
+   Delay(90);
+   SlideCeilingNice(166,0,0,50,-1);
+   AreaSound(5003, 2, 1048, 500, 255);
+   Delay(70);
+   Unblock(Block8);
+   End();
+
+23:    // open last door
+   Block(Block9);
+   SlideCeilingNice(168,0,120,50,-1);
+   AreaSound(5003, 2, 824, 500, 255);
+   Delay(90);
+   SlideCeilingNice(168,0,0,50,-1);
+   AreaSound(5003, 2, 824, 500, 255);
+   Delay(70);
+   Unblock(Block9);
+   End();
+
+31:  // open door to druid trap chamber
+   Set(DruidLock, NOT_ACTIVATED);
+   SlideCeilingNice(162, 0, 140, 80, -1);
+   AreaSound(5003, 139, 1433, 500, 255);
+   End();
+
+40:  // open exit door with switch
+   Block(Block10);
+   ChangeSideTexture(1636,"SWIT1U");
+   AreaSound(6007,-16,516,300,255);
+   Delay(100);
+   SlideFloorNice(176, 0, 0, 100, -1);
+   Sound(6010);
+   Print("You hear something moving in the distance");
+   AreaSound(5001,-16, 516, 500, 255);
+   Delay(100);
+   Effect(29, 500, 500, 500);
+   SlideCeilingNice(129, 0, 120, 50, -1);
+   End();
+
+
+99:     // all purpose ender
+   End();
+
+200:    // teleport to druidtown
+   Teleport(244, 1730, 0);
+   End();
+201:    // door is locked message
+   Sound(6010);
+   Print("The exit passage is blocked by a large stone slab.");
+   End();
+
+
+
+

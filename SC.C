@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <mem.h>
+//#include <mem.h>
 #include <conio.h>
 #include <malloc.h>
 #include <io.h>
 #include <ctype.h>
-#include <bios.h>
+//#include <bios.h>
 #include <string.h>
 
 #define QUOTE_START    0xFF
@@ -261,7 +261,7 @@ T_void AddDefnum(T_byte8 *p_name, T_sword32 number)
 
 //printf("Defining number: %s %ld\n", p_name, number) ;
     strcpy(G_defnums[G_numDefnums].name, p_name) ;
-    G_defnums[G_numDefnums].number = number ;
+    G_defnums[G_numDefnums].number = (T_word16)number ;
     G_numDefnums++ ;
 }
 
@@ -458,7 +458,7 @@ T_void CompileArgs(T_byte8 *p_args, T_word16 numArgs)
                 return ;
             }
             OutputByte(SCRIPT_DATA_TYPE_STRING) ;
-            OutputByte(len) ;
+            OutputByte((T_byte8)len) ;
             for (k=0; k<len; k++)  {
                 OutputByte(arg[1+k]) ;
             }
@@ -467,7 +467,7 @@ T_void CompileArgs(T_byte8 *p_args, T_word16 numArgs)
             value = FindFlag(arg) ;
             if (value != -1)  {
                 OutputByte(SCRIPT_DATA_TYPE_FLAG) ;
-                OutputByte(value) ;
+                OutputByte((T_byte8)value) ;
             } else {
                 value = FindVar(arg) ;
                 if (value != -1)  {
@@ -517,7 +517,7 @@ T_void CompileCommand(T_byte8 *p_line)
         exit(201) ;
     }
 //    printf("command: <%s> = %d\n", command2, commandNum) ;
-    OutputByte(commandNum) ;
+    OutputByte((T_byte8)commandNum) ;
 
     p_open = strstr(p_line, "(") ;
     if (!p_open)  {
@@ -543,7 +543,7 @@ T_void CompileDefvar(T_byte8 *p_defvar)
             G_line) ;
         G_errors++ ;
     } else {
-        AddVar(var, value) ;
+        AddVar(var, (T_word16)value) ;
     }
 }
 

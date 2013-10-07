@@ -5,7 +5,7 @@ If                       3     2
 Goto                     4     1
 Add                      5     3
 Subtract                 6     3
-Muliply                  7     3
+Multiply                  7     3
 Divide                   8     3
 Increment                9     1
 Decrement                10    1
@@ -61,3 +61,7 @@ GroupState               59    1
 Block                    60    1
 Unblock                  61    1
 ToggleSwitch             62    6
+SlideFloorNice           63    5
+SlideCeilingNice         64    5
+JournalEntry             65    1
+

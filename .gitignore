@@ -1,2 +1,8 @@
 /.cproject
 /.project
+/Debug
+/ipch
+/Release
+/AAScriptCompiler.opensdf
+/AAScriptCompiler.sdf
+/AAScriptCompiler.suo
